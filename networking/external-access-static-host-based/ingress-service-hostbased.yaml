@@ -11,51 +11,51 @@ metadata:
 spec:
   tls:
     - hosts:
-        - kafka.$DOMAIN
-        - b0.$DOMAIN
-        - b1.$DOMAIN
-        - b2.$DOMAIN
-        - controlcenter.$DOMAIN
-        - ksqldb.$DOMAIN
-        - connect.$DOMAIN
+        - kafka.aks.shapeblock.xyz
+        - b0.aks.shapeblock.xyz
+        - b1.aks.shapeblock.xyz
+        - b2.aks.shapeblock.xyz
+        - controlcenter.aks.shapeblock.xyz
+        - ksqldb.aks.shapeblock.xyz
+        - connect.aks.shapeblock.xyz
   rules:
-    - host: kafka.$DOMAIN
+    - host: kafka.aks.shapeblock.xyz
       http:
         paths:
           - backend:
               serviceName: kafka-bootstrap
               servicePort: 9092
-    - host: b0.$DOMAIN
+    - host: b0.aks.shapeblock.xyz
       http:
         paths:
           - backend:
               serviceName: kafka-0-internal
               servicePort: 9092
-    - host: b1.$DOMAIN
+    - host: b1.aks.shapeblock.xyz
       http:
         paths:
           - backend:
               serviceName: kafka-1-internal
               servicePort: 9092
-    - host: b2.$DOMAIN
+    - host: b2.aks.shapeblock.xyz
       http:
         paths:
           - backend:
               serviceName: kafka-2-internal
               servicePort: 9092
-    - host: controlcenter.$DOMAIN
+    - host: controlcenter.aks.shapeblock.xyz
       http:
         paths:
           - backend:
               serviceName: controlcenter-0-internal
               servicePort: 9021
-    - host: ksqldb.$DOMAIN
+    - host: ksqldb.aks.shapeblock.xyz
       http:
         paths:
           - backend:
               serviceName: ksqldb-bootstrap
               servicePort: 8088
-    - host: connect.$DOMAIN
+    - host: connect.aks.shapeblock.xyz
       http:
         paths:
           - backend:

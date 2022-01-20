@@ -27,15 +27,10 @@ spec:
     secretRef: tls-group1
   listeners:
     external:
-      authentication:
-        type: mtls
-        principalMappingRules:
-          - RULE:.*CN[\s]?=[\s]?([a-zA-Z0-9.]*)?.*/$1/
       externalAccess:
         type: staticForHostBasedRouting
         staticForHostBasedRouting:
-          domain: ## Domain
-          brokerPrefix:  ## Bootstrap prefix
+          domain: aks.shapeblock.xyz
           port: 443
       tls:
         enabled: true
@@ -50,6 +45,17 @@ spec:
   image:
     application: confluentinc/cp-server-connect:7.0.1
     init: confluentinc/confluent-init-container:2.2.0-1
+  build:
+    type: onDemand
+    onDemand:
+      plugins:
+        locationType: confluentHub
+        confluentHub:
+          - name: kafka-connect-datagen
+            owner: confluentinc
+            version: 0.5.2
+  mountedSecrets:
+  - secretRef: kafka-certs
   tls:
     secretRef: tls-group1
   dependencies:
