@@ -72,6 +72,12 @@ spec:
   image:
     application: confluentinc/cp-enterprise-control-center:7.0.1
     init: confluentinc/confluent-init-container:2.2.0-1
+  configOverrides:
+    server:
+      - confluent.controlcenter.schema.registry.url=https://schemaregistry.confluent.svc.cluster.local:8081
+      - confluent.controlcenter.ksql.ksqldb.url=https://ksqldb-bootstrap.confluent.svc.cluster.local:8088
+      - confluent.controlcenter.ksql.ksqldb.advertised.url=https://ksqldb.aks.shapeblock.xyz
+      - confluent.controlcenter.connect.connect.cluster=https://connect-bootstrap.confluent.svc.cluster.local:8083
   dataVolumeCapacity: 10Gi
   tls:
     secretRef: tls-group1
