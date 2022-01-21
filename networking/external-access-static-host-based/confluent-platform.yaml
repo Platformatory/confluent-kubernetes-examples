@@ -111,6 +111,9 @@ spec:
   image:
     application: confluentinc/cp-ksqldb-server:7.0.1
     init: confluentinc/confluent-init-container:2.2.0-1
+  configOverrides:
+    server:
+      - ksql.schema.registry.url=https://schemaregistry.aks.shapeblock.xyz
   dataVolumeCapacity: 10Gi
   tls:
     secretRef: tls-group1
