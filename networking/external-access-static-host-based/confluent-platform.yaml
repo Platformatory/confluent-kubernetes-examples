@@ -84,6 +84,30 @@ spec:
   dependencies:
     kafka:
       bootstrapEndpoint: kafka:9071
+  authentication:
+    type: ldap
+    ldap:
+      roles: [c3users,readonlyusers]
+      restrictedRoles: [readonlyusers]
+      property:
+        useLdaps : "false"
+        debug: "true"
+        contextFactory: "com.sun.jndi.ldap.LdapCtxFactory"
+        hostname: "ldap.confluent.svc.cluster.local"
+        port: "389"
+        bindDn: "cn=admin,dc=test,dc=com"
+        bindPassword: "confluentrox"
+        authenticationMethod: "simple"
+        forceBindingLogin: "false"
+        userBaseDn: "ou=users,dc=test,dc=com"
+        userObjectClass: "inetOrgPerson" 
+        userRdnAttribute: "uid"
+        userIdAttribute: "cn"
+        roleBaseDn: "ou=groups,dc=test,dc=com"
+        roleNameAttribute: "cn"
+        roleMemberAttribute: "memberUid"
+        roleObjectClass: "posixGroup" 
+        userPasswordAttribute: "userPassword"
 ---
 apiVersion: platform.confluent.io/v1beta1
 kind: SchemaRegistry
