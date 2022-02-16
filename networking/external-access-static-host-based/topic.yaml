@@ -10,3 +10,5 @@ spec:
   kafkaClusterRef:
     name: kafka
     namespace: confluent
+  kafkaRestClassRef:
+    name: default

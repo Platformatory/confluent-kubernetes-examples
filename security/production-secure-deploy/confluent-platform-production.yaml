@@ -15,7 +15,7 @@ spec:
     jaasConfig:
       secretRef: credential
   tls:
-    secretRef: tls-group1
+    secretRef: internal-tls
 ---
 apiVersion: platform.confluent.io/v1beta1
 kind: Kafka
@@ -24,12 +24,14 @@ metadata:
   namespace: confluent
 spec:
   replicas: 3
+  metricReporter:
+    enabled: true  
   image:
     application: confluentinc/cp-server:7.0.1
     init: confluentinc/confluent-init-container:2.2.0-1
   dataVolumeCapacity: 10Gi
   tls:
-    secretRef: tls-group1
+    secretRef: internal-tls
   listeners:
     internal:
       authentication:
@@ -44,13 +46,13 @@ spec:
         jaasConfig:
           secretRef: credential
       externalAccess:
-        type: loadBalancer
-        loadBalancer:
-          domain: my.domain
-          brokerPrefix: rb
-          bootstrapPrefix: rb
+        type: staticForHostBasedRouting
+        staticForHostBasedRouting:
+          domain: aks.shapeblock.xyz
+          port: 443
       tls:
         enabled: true
+        secretRef: tls-group1
   authorization:
     type: rbac
     superUsers:
@@ -110,7 +112,7 @@ spec:
     application: confluentinc/cp-server-connect:7.0.1
     init: confluentinc/confluent-init-container:2.2.0-1
   tls:
-    secretRef: tls-group1
+    secretRef: internal-tls
   externalAccess:
     type: loadBalancer
     loadBalancer:
@@ -149,7 +151,7 @@ spec:
     application: confluentinc/cp-schema-registry:7.0.1
     init: confluentinc/confluent-init-container:2.2.0-1
   tls:
-    secretRef: tls-group1
+    secretRef: internal-tls
   externalAccess:
     type: loadBalancer
     loadBalancer:
@@ -196,7 +198,7 @@ spec:
       domain: my.domain
       prefix: rb-ksql
   tls:
-    secretRef: tls-group1
+    secretRef: internal-tls
   dependencies:
     kafka:
       bootstrapEndpoint: kafka.confluent.svc.cluster.local:9071
@@ -242,7 +244,7 @@ spec:
       domain: my.domain
       prefix: rb-c3
   tls:
-    secretRef: tls-group1
+    secretRef: internal-tls
   dependencies:
     kafka:
       bootstrapEndpoint: kafka.confluent.svc.cluster.local:9071
