@@ -80,9 +80,9 @@ Please change the namespace from confluent to your appropriate namespace in the 
 
 ## TODO
 
-1. Add connector
-2. Add and expose schema registry.
-3. Add services and ingresses
+1. ~Add connect~
+2. ~Add and expose schema registry.~
+3. ~Add services and ingresses~
 4. Instructions for producer, consumer, connector and ksqldb.
 5. Adding/removing/updating new users.
 6. Production cluster sizing recommendations
