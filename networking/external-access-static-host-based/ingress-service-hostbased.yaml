@@ -18,6 +18,7 @@ spec:
         - controlcenter.aks.shapeblock.xyz
         - ksqldb.aks.shapeblock.xyz
         - connect.aks.shapeblock.xyz
+        - schemaregistry.aks.shapeblock.xyz
   rules:
     - host: kafka.aks.shapeblock.xyz
       http:
@@ -61,3 +62,9 @@ spec:
           - backend:
               serviceName: connect-bootstrap
               servicePort: 8083
+    - host: schemaregistry.aks.shapeblock.xyz
+      http:
+        paths:
+          - backend:
+              serviceName: schemaregistry-bootstrap
+              servicePort: 8081
